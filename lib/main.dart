@@ -47,71 +47,96 @@ void main() {
 //   }
 // }
 
+// class Body extends StatelessWidget {
+//   const Body({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // Placeholder : 특정 위젯이 올 자리를 확보
+//     // Column은 수직으로 배열해준다. 상하에 대해서만 지정. mainAxisAligment로 start(상), center(중), end(하)로 위치 조정 가능
+//     // -> 좌우의 폭을 지정할 수 없다 -> container로 wrap하고 width을 무제한으로 주고 crossAxisAligment로 좌, 중 ,우 조정 가능
+//     // Row는 Column과 유사하지만 수평으로 배열해준다 -> 좌우에 대해서만 지정한다. mainAxisAlignment로 start(좌), center(중), end(우)로 위치 조정 가능
+//     // -> 상, 중, 하로 위치 조절은 불가능 -> container로 wrap하고 height를 무제한으로 주고 crossAxisAligment로 상, 중, 하 조정 가능
+//
+//     // SingleChildScrollView : 하나의 자식 객체를 갖는 scroll view -> 높이가 초과할 거 같다면 scroll로 구현해 erorr 해결
+//     // child가 Column인 경우 문제 없지만 Row로 하면 따로 선언해줄게 있음
+//     // ctrl + r -> 한번에 replace 가능
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//
+//         children: [
+//           Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),
+//           Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),Container(
+//             width: 100,
+//             height: 100,
+//             color: Colors.grey,
+//             margin: EdgeInsets.symmetric(horizontal: 8),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// 고정 길이를 사용하면 화면을 넘어가거나 부족하거나 하는 현상이 발생 가능 -> flexible widget 사용
+// Flexible : 비율도 조절 가능
+// Expanded : 남은 부분을 모두 하나의 widget으로 채우고 싶을 때 -> SingleChild
 class Body extends StatelessWidget {
   const Body({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Placeholder : 특정 위젯이 올 자리를 확보
-    // Column은 수직으로 배열해준다. 상하에 대해서만 지정. mainAxisAligment로 start(상), center(중), end(하)로 위치 조정 가능
-    // -> 좌우의 폭을 지정할 수 없다 -> container로 wrap하고 width을 무제한으로 주고 crossAxisAligment로 좌, 중 ,우 조정 가능
-    // Row는 Column과 유사하지만 수평으로 배열해준다 -> 좌우에 대해서만 지정한다. mainAxisAlignment로 start(좌), center(중), end(우)로 위치 조정 가능
-    // -> 상, 중, 하로 위치 조절은 불가능 -> container로 wrap하고 height를 무제한으로 주고 crossAxisAligment로 상, 중, 하 조정 가능
-
-    // SingleChildScrollView : 하나의 자식 객체를 갖는 scroll view -> 높이가 초과할 거 같다면 scroll로 구현해 erorr 해결
-    // child가 Column인 경우 문제 없지만 Row로 하면 따로 선언해줄게 있음
-    // ctrl + r -> 한번에 replace 가능
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-
+    return Row(
         children: [
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),Container(
-            width: 100,
-            height: 100,
-            color: Colors.grey,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
+          Container(width: 50, height: 200, color: Colors.red,),
+          Expanded(child: Container(color: Colors.blue,width: 100,)),
+          Flexible(child: Container(color: Colors.red, width: 100,)),
+
+          // Flexible(flex: 1, child: Container(color: Colors.red)),
+          // Flexible(flex: 2, child: Container(color: Colors.blue)),
+          // Flexible(flex: 3, child: Container(color: Colors.green)),
+          // Flexible(flex: 4, child: Container(color: Colors.yellow)),
+
         ],
-      ),
     );
   }
 }
+
 
