@@ -6,7 +6,7 @@ void main() {
   runApp(MaterialApp(
     home: Scaffold(
       appBar: AppBar(
-        title: Text('Widget을 상하로 배치하기'),
+        title: Text('Stateless VS Stateful'),
       ),
       body: Body(),
     ),
@@ -18,41 +18,81 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // stack으로 widget을 겹쳐서 만들 수 있다
-    // 겹쳐진 것 중 하나의 위치를 옮기고 싶다면
-    // 1. Positioned widget을 활용해 top, bottom, left, right 매개변수를 통해 위치를 조정할 수 있음 -> 각 변수에 정확한 수치를 입력해 간격을 떨어뜨림
-    // 2. Align widget을 활용해 위치를 조정 가능
+    return Column(children: [
+      ExampleStateless(),
+      ExampleStateful(index: 3),
+    ]);
+  }
+}
 
-    return Stack(
-      children: [
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            width: 300,
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(150),
-            ),
+class ExampleStateless extends StatelessWidget {
+  const ExampleStateless({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: Container(
+        color: Colors.red,
+      ),
+    );
+  }
+}
+
+// widget의 색, 형태 등을 바꿀 수 있다
+// 모든 객체들은 state class 안에 넣어야함 -> class _ExampleStatefulState extends State<ExampleStateful>
+class ExampleStateful extends StatefulWidget {
+  final int index;
+
+  // 매개변수로 받아 오기
+  const ExampleStateful({required this.index, super.key});
+
+  @override
+  State<ExampleStateful> createState() => _ExampleStatefulState();
+}
+
+class _ExampleStatefulState extends State<ExampleStateful> {
+  late int _index;
+  late TextEditingController textController;
+
+  // method 찾을 땐 ctrl + o(알파벳)
+
+  // 초기값 조정
+  @override
+  void initState() {
+    super.initState(); // 항상 이거부터 선언
+    _index = widget.index;
+    textController = TextEditingController();
+  }
+
+  // 리소스를 다 사용하고 반납 -> 앱이 리소스를 많이 잡아먹어 점점 느려지는 현상을 방어 가능
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose(); // 마지막에 선언
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            if (_index == 5) {
+              _index = 0;
+              return;
+            }
+            _index++;
+          });
+        },
+        child: Container(
+          color: Colors.blue.withOpacity(_index / 5),
+          child: Center(
+            child: Text('$_index'),
           ),
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            width: 280,
-            height: 280,
-            decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(140),
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Text('Count 0',
-          style: TextStyle(color: Colors.red, fontSize: 32),),
-        )
-      ],
+      ),
     );
   }
 }
