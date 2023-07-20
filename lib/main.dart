@@ -68,43 +68,43 @@ void main() {
 //
 //         children: [
 //           Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),
 //           Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
 //           ),Container(
-//             width: 100,
+//             width:  double.infinity,
 //             height: 100,
 //             color: Colors.grey,
 //             margin: EdgeInsets.symmetric(horizontal: 8),
@@ -123,18 +123,55 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children: [
-          Container(width: 50, height: 200, color: Colors.red,),
-          Expanded(child: Container(color: Colors.blue,width: 100,)),
-          Flexible(child: Container(color: Colors.red, width: 100,)),
 
-          // Flexible(flex: 1, child: Container(color: Colors.red)),
-          // Flexible(flex: 2, child: Container(color: Colors.blue)),
-          // Flexible(flex: 3, child: Container(color: Colors.green)),
-          // Flexible(flex: 4, child: Container(color: Colors.yellow)),
+    // SingleChildScrollView 에서 Container 사이에 Expanded를 사용하게 된다면 scroll이기에 높이가 정해지지 않아서 에러 발생
+    // -> flexible을 사용해 height를 명시적으로 정할 필요가 있다
+    return Container(
+      width: double.infinity,
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+
+        children: [
+          Container(width: double.infinity,
+          height: 100,
+          color: Colors.red,
+          margin: const EdgeInsets.symmetric(vertical: 8),),
+
+
+          Expanded(
+            child: Container(width:  double.infinity,
+              height: 100,
+              color: Colors.red,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                    Container(color: Colors.blue, height: 50, width:  double.infinity, margin: const EdgeInsets.symmetric(vertical: 8),),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          Container(width:  double.infinity,
+            height: 100,
+            color: Colors.red,
+            margin: const EdgeInsets.symmetric(vertical: 8),),
+
 
         ],
+      ),
     );
   }
 }
